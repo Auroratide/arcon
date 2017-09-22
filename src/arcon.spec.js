@@ -48,6 +48,25 @@ describe('arcon', () => {
           component: 'a'
         }).type).to.equal('a');
       });
+
+      it('should pass no props to the react element when the component has no props', () => {
+        expect(arcon.parse({
+          component: 'div'
+        }).props).to.be.empty;
+      });
+
+      it('should pass props of the component object as props to the react element', () => {
+        expect(arcon.parse({
+          component: 'div',
+          props: {
+            className: 'class',
+            number: 5
+          }
+        }).props).to.deep.equal({
+          className: 'class',
+          number: 5
+        });
+      });
     });
 
   });
