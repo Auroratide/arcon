@@ -4,7 +4,7 @@
   "description": "Json to React",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha './src/**/*.spec.js'"
   },
   "keywords": [
     "json",
@@ -13,5 +13,9 @@
     "parse"
   ],
   "author": "auroratide",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3"
+  }
 }
