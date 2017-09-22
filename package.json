@@ -1,0 +1,17 @@
+{
+  "name": "arcon",
+  "version": "0.0.1",
+  "description": "Json to React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "json",
+    "react",
+    "convert",
+    "parse"
+  ],
+  "author": "auroratide",
+  "license": "ISC"
+}
