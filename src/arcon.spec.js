@@ -4,6 +4,10 @@ const arcon = require('./arcon');
 describe('arcon', () => {
 
   describe('parse', () => {
+    it('should return null when passed null', () => {
+      expect(arcon.parse(null)).to.be.null;
+    });
+
     it('should return the passed string when given a string', () => {
       expect(arcon.parse('')).to.equal('');
       expect(arcon.parse('a string')).to.equal('a string');
@@ -23,5 +27,5 @@ describe('arcon', () => {
       expect(arcon.parse(false)).to.be.false;
     });
   });
-  
+
 });
