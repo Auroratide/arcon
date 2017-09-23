@@ -160,4 +160,38 @@ describe('arcon', () => {
 
   });
 
+  describe('overall', () => {
+    const Link = props => React.createElement(
+      'a',
+      { href: props.to },
+      props.children
+    );
+
+    const components = { Link };
+
+    const structure = {
+      component: 'p',
+      children: ['This is a test.  Click ', {
+        component: 'Link',
+        children: 'here',
+        props: {
+          to: 'http://auroratide.com',
+          key: 0
+        }
+      }, ' to go to my blog.']
+    };
+
+    const parser = arcon.use(components);
+
+    it('should parse the given complex structure', () => {
+      expect(parser.parse(structure)).to.deep.equal(
+        React.createElement('p', {}, [
+          'This is a test.  Click ',
+          React.createElement(Link, { to: 'http://auroratide.com', key: 0 }, 'here'),
+          ' to go to my blog.'
+        ])
+      );
+    });
+  });
+
 });
