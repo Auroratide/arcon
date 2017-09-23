@@ -10,6 +10,10 @@ describe('arcon', () => {
         expect(arcon.parse(null)).to.be.null;
       });
 
+      it('should return undefined when passed undefined', () => {
+        expect(arcon.parse(undefined)).to.be.undefined;
+      });
+
       it('should return the passed string when parsing a string', () => {
         expect(arcon.parse('')).to.equal('');
         expect(arcon.parse('a string')).to.equal('a string');
@@ -66,6 +70,37 @@ describe('arcon', () => {
           className: 'class',
           number: 5
         });
+      });
+
+      it('should not pass children when the component does not define children', () => {
+        expect(arcon.parse({
+          component: 'div'
+        }).props.children).to.be.undefined;
+      });
+
+      it('should parse a component\'s single child', () => {
+        expect(arcon.parse({
+          component: 'div',
+          children: {
+            component: 'span'
+          }
+        }).props.children.type).to.equal('span');
+      });
+
+      it('should parse a component\'s array of children', () => {
+        const parsed = arcon.parse({
+          component: 'div',
+          children: [ {
+            component: 'span',
+            props: { key: 0 }
+          }, {
+            component: 'p',
+            props: { key: 1 }
+          } ]
+        });
+
+        expect(parsed.props.children).to.have.length(2);
+        expect(parsed.props.children.map(c => c.type)).to.have.ordered.members(['span', 'p']);
       });
     });
 
