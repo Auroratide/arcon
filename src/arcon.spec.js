@@ -123,6 +123,31 @@ describe('arcon', () => {
           'div', 'span', 'p'
         ]);
       });
+
+      it('should use index as the key when key is not provided', () => {
+        expect(arcon.parse([ {
+          component: 'div'
+        }, {
+          component: 'span'
+        }, {
+          component: 'p'
+        } ]).map(elem => elem.key)).to.have.ordered.members([
+          '0', '1', '2'
+        ]);
+      });
+
+      it('should use provided key when key is provided as a prop', () => {
+        expect(arcon.parse([ {
+          component: 'div'
+        }, {
+          component: 'span',
+          props: { key: 'spanny' }
+        }, {
+          component: 'p'
+        } ]).map(elem => elem.key)).to.have.ordered.members([
+          '0', 'spanny', '2'
+        ]);
+      });
     });
 
   });
@@ -176,7 +201,7 @@ describe('arcon', () => {
         children: 'here',
         props: {
           to: 'http://auroratide.com',
-          key: 0
+          key: '0'
         }
       }, ' to go to my blog.']
     };

@@ -1,12 +1,18 @@
 var React = require('react');
 
 var parseWithComponents = function(components) {
-  return function parse(element) {
+  return function parse(element, index) {
     if(element && element.map) {
       return element.map(parse);
     } else if(element && element.component) {
       var component = components[element.component];
       component = component ? component : element.component;
+
+      if(element.props) {
+        element.props.key = element.props.key || ('' + index);
+      } else if(index !== undefined) {
+        element.props = { key: '' + index }
+      }
 
       if(element.children) {
         return React.createElement(component, element.props, parse(element.children));
