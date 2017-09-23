@@ -69,6 +69,26 @@ describe('arcon', () => {
       });
     });
 
+    describe('arrays', () => {
+      it('should parse an empty array as an empty array', () => {
+        const parsed = arcon.parse([]);
+        expect(parsed).to.be.a('array');
+        expect(parsed).to.be.empty;
+      });
+
+      it('should parse arrays by parsing each element in the array', () => {
+        expect(arcon.parse([ {
+          component: 'div'
+        }, {
+          component: 'span'
+        }, {
+          component: 'p'
+        } ]).map(elem => elem.type)).to.have.ordered.members([
+          'div', 'span', 'p'
+        ]);
+      });
+    });
+
   });
 
 });
