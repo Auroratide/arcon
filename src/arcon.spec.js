@@ -1,3 +1,4 @@
+const React = require('react');
 const expect = require('chai').expect;
 const arcon = require('./arcon');
 
@@ -122,6 +123,39 @@ describe('arcon', () => {
           'div', 'span', 'p'
         ]);
       });
+    });
+
+  });
+
+  describe('use', () => {
+
+    const CustomComponent = props => React.createElement('div', props);
+
+    it('should parse custom components', () => {
+      const parser = arcon.use({ CustomComponent });
+      expect(parser.parse({
+        component: 'CustomComponent'
+      }).type.name).to.equal('CustomComponent');
+    });
+
+    it('should assume unknown components as regular html tags', () => {
+      expect(arcon.parse({
+        component: 'CustomComponent'
+      }).type).to.equal('CustomComponent');
+    });
+
+    it('should use an empty component library when passed null', () => {
+      const parser = arcon.use(null);
+      expect(parser.parse({
+        component: 'CustomComponent'
+      }).type).to.equal('CustomComponent');
+    });
+
+    it('should use an empty component library when passed undefined', () => {
+      const parser = arcon.use(undefined);
+      expect(parser.parse({
+        component: 'CustomComponent'
+      }).type).to.equal('CustomComponent');
     });
 
   });
