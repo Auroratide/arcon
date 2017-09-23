@@ -1,6 +1,6 @@
 {
   "name": "arcon",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Json to React",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,10 @@
   "author": {
     "name": "Timothy Foster",
     "url": "http://auroratide.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Auroratide/arcon.git"
   },
   "license": "MIT",
   "devDependencies": {
